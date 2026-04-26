@@ -1,5 +1,7 @@
 use serde::Deserialize;
-use std::fs;
+use std::{fs, path::PathBuf};
+use anyhow::{Result, Context};
+use dirs::config_dir;
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
@@ -8,18 +10,29 @@ pub struct Config {
 
 #[derive(Debug, Deserialize)]
 pub struct Rule {
-    pub name: String,
+    // pub name: String,
     pub extensions: Option<Vec<String>>,
     pub extension: Option<String>,
     pub starts_with: Option<String>,
     pub destination: String,
 }
 
-/// Load config from TOML file
-pub fn load_config(path: &str) -> Config {
+pub fn load_config(path: &str) -> Result<Config> {
     let content = fs::read_to_string(path)
-        .expect("❌ Failed to read config file");
+        .with_context(|| format!("❌ Failed to read config file: {}", path))?;
 
-    toml::from_str(&content)
-        .expect("❌ Failed to parse TOML")
+    let config: Config = toml::from_str(&content)
+        .with_context(|| "❌ Failed to parse TOML config")?;
+
+    Ok(config)
+}
+
+/// Get default config path
+pub fn get_default_config_path() -> Option<PathBuf> {
+    if let Some(mut dir) = config_dir() {
+        dir.push("smart-organizer");
+        dir.push("config.toml");
+        return Some(dir);
+    }
+    None
 }
