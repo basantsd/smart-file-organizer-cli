@@ -1,5 +1,21 @@
 # Smart File Organizer CLI (Rust)
 
+![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
+
+## 📸 Demo
+
+### Before: Unorganized Files
+![Unorganized Files](./demo/1-unorganized-files.png)
+
+### Checking Dry Run
+![Check Dry Run](./demo/2-check-dry-run.png)
+
+### Moving Files
+![Move Files](./demo/3-move-files.png)
+
+### After: Organized Files
+![Files Organized](./demo/4-file-organized.png)
+
 A fast, flexible, and safe command-line tool built in Rust to automatically organize messy folders into structured directories using customizable rules.
 
 ---
