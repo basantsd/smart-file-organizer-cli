@@ -1,0 +1,15 @@
+[[rules]]
+name = "Images"
+extensions = ["jpg", "png", "jpeg"]
+destination = "Images"
+
+[[rules]]
+name = "Documents"
+extensions = ["pdf", "docx", "txt"]
+destination = "Documents"
+
+[[rules]]
+name = "Reports"
+extension = "csv"
+starts_with = "report_"
+destination = "Data"
